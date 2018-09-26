@@ -19,18 +19,17 @@ RUN apt-get update \
     bison \
     build-essential \
     flex \
-    gcc-4.9 \
-    g++-4.9 \
     # Git
     git \
     # PostgreSQL
     libpq5 \
     libpq-dev \
-    postgresql-client-9.5 \
+    postgresql-10 \
+    postgresql-plpython-10 \
+    postgresql-client-10 \
     postgresql-client-common \
     # GIS:
     # - Proj
-    proj \
     proj-bin \
     proj-data \
     libproj-dev \
@@ -45,13 +44,9 @@ RUN apt-get update \
     gdal-bin \
     libgdal-dev \
     libgdal1-dev \
-    gdal2.1-static-bin \
     # Postgis
     libxml2-dev \
-    liblwgeom-2.2.2 \
     postgis \
-    postgresql-9.5-postgis-2.2 \
-    postgresql-9.5-postgis-scripts \
     # NodeJS and dependencies
     libcairo2-dev \
     libgif-dev \
