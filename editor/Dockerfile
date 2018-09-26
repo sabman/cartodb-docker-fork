@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM ubuntu:16.04
 
 # Set locale.
 RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
@@ -94,7 +94,7 @@ ENV PATH=/opt/rubies/ruby-2.2.3/bin:$PATH
 RUN gem install bundler compass
 
 # CartoDB/cartodb version
-ENV CARTODB_VERSION=4.11.128
+ENV CARTODB_VERSION=4.21.0
 
 # Download the Editor program, using the specified release tag.
 RUN git clone --recursive --branch v${CARTODB_VERSION} --depth 1 https://github.com/CartoDB/cartodb.git
