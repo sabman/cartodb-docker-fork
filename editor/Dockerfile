@@ -6,7 +6,7 @@ RUN apt-get update \
   && locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
   # Install python-software-properties package to make it easier to use PPAs.
   && apt-get -y --no-install-recommends install \
-    python-software-properties \
+    software-properties-common python-software-properties \
   # Add PPAs.
   && add-apt-repository ppa:cartodb/gcc \
   && add-apt-repository ppa:cartodb/gis \
