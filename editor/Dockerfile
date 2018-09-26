@@ -1,9 +1,11 @@
 FROM ubuntu:16.04
 
-# Set locale.
-RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+RUN apt-get update \
+  # Install locales package, and update locale
+  && apt-get install -y --no-install-recommends locales \
+  && locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
   # Install python-software-properties package to make it easier to use PPAs.
-  && apt-get update && apt-get -y --no-install-recommends install \
+  && apt-get -y --no-install-recommends install \
     python-software-properties \
   # Add PPAs.
   && add-apt-repository ppa:cartodb/gcc \
