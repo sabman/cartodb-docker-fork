@@ -8,10 +8,9 @@ RUN apt-get update \
   && apt-get -y --no-install-recommends install \
     software-properties-common python-software-properties \
   # Add PPAs.
-  && add-apt-repository ppa:cartodb/gcc \
   && add-apt-repository ppa:cartodb/gis \
   && add-apt-repository ppa:cartodb/nodejs \
-  && add-apt-repository ppa:cartodb/postgresql-9.5 \
+  && add-apt-repository ppa:cartodb/postgresql-10 \
   # Install apt packages.
   && apt-get update && apt-get -y --no-install-recommends install \
     # build essentials
