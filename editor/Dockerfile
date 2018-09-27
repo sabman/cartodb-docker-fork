@@ -106,7 +106,6 @@ RUN bundle install \
     js-yaml \
     yargs \
   # Compile static assets
-  && npm run carto-node && npm run build:static \
   && PATH=$PATH:/cartodb/node_modules/grunt-cli/bin \
     bundle exec grunt --environment=${RAILS_ENV} \
   # Clean up.
