@@ -1,49 +1,49 @@
 version: '2'
 services:
   cartodb-postgis:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-postgis
+    #image: sabman/ihmeuw-cartodb-docker_cartodb-postgis
     container_name: cartodb-postgis
-    # build:
-    #   context: postgis
+    build:
+      context: postgis
   cartodb-redis:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-redis
+    #image: sabman/ihmeuw-cartodb-docker_cartodb-redis
     container_name: cartodb-redis
-    # build:
-    #   context: redis
+    build:
+      context: redis
   cartodb-sqlapi:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-sqlapi
+    #image: sabman/ihmeuw-cartodb-docker_cartodb-sqlapi
     depends_on:
       - cartodb-postgis
       - cartodb-redis
     container_name: cartodb-sqlapi
-    # build:
-    #   context: sqlapi
+    build:
+      context: sqlapi
   cartodb-mapsapi:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-mapsapi
+    #image: sabman/ihmeuw-cartodb-docker_cartodb-mapsapi
     depends_on:
       - cartodb-postgis
       - cartodb-redis
     container_name: cartodb-mapsapi
-    # build:
-    #   context: mapsapi
+    build:
+      context: mapsapi
   cartodb-editor:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-editor
+    #image: sabman/ihmeuw-cartodb-docker_cartodb-editor
     depends_on:
       - cartodb-postgis
       - cartodb-redis
       - cartodb-mapsapi
       - cartodb-sqlapi
     container_name: cartodb-editor
-    # build:
-    #   context: editor
+    build:
+      context: editor
   cartodb-router:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-router
+    #image: sabman/ihmeuw-cartodb-docker_cartodb-router
     depends_on:
       - cartodb-mapsapi
       - cartodb-sqlapi
       - cartodb-editor
     container_name: cartodb-router
-    # build:
-    #   context: router
+    build:
+      context: router
     ports:
       - 80:80
