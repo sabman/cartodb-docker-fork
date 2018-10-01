@@ -1,4 +1,4 @@
-FROM postgres:9.5
+FROM postgres:10
 
 RUN apt-get update \
   && apt-get -y --no-install-recommends install \
@@ -7,9 +7,9 @@ RUN apt-get update \
     # PostgreSQL
     libpq-dev \
     libpq5 \
-    postgresql-contrib-9.5 \
-    postgresql-plpython-9.5 \
-    postgresql-server-dev-9.5 \
+    postgresql-contrib-10 \
+    postgresql-plpython-10 \
+    postgresql-server-dev-10 \
     # GIS:
     # - Proj
     libproj-dev \
@@ -20,21 +20,22 @@ RUN apt-get update \
     libjson0-dev \
     python-simplejson \
     # - GEOS
-    libgeos-c1 \
+    libgeos-c1v5 \
     libgeos-dev \
     # - GDAL
     gdal-bin \
+    libgdal-dev \
     libgdal1-dev \
     # PostGIS
-    liblwgeom-2.1.4 \
+    liblwgeom-2.5.0 \
     libxml2-dev \
-    postgis-2.3 \
-    postgresql-9.5-postgis-2.3 \
-    postgresql-9.5-postgis-2.3-scripts \
+    postgis \
+    postgresql-10-postgis-2.5 \
+    postgresql-10-postgis-2.5-scripts \
   && rm -rf /var/lib/apt/lists/*
 
 # CartoDB/cartodb-postgresql version
-ENV CARTODB_POSTGRESQL_VERSION=0.22.0
+ENV CARTODB_POSTGRESQL_VERSION=0.24.0
 
 RUN git clone \
     --branch ${CARTODB_POSTGRESQL_VERSION} \
