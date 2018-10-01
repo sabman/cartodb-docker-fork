@@ -28,4 +28,4 @@ echo "Creating the default user, who will own the common data..."
 script/create_dev_user "$DEFAULT_USER" "$PASSWORD" "$EMAIL"
 
 echo "Starting the application..."
-exec bundle exec rails server
+exec bundle exec rails server -b 0.0.0.0
