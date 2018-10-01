@@ -16,8 +16,6 @@ RUN apt-get update \
     proj-bin \
     proj-data \
     # - JSON
-    libjson0 \
-    libjson0-dev \
     python-simplejson \
     # - GEOS
     libgeos-c1v5 \
@@ -25,7 +23,6 @@ RUN apt-get update \
     # - GDAL
     gdal-bin \
     libgdal-dev \
-    libgdal1-dev \
     # PostGIS
     liblwgeom-2.5.0 \
     libxml2-dev \
