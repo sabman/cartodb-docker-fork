@@ -1,9 +1,6 @@
-FROM buildpack-deps:stretch
+FROM buildpack-deps:18.04
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-  && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-  && apt-get update \
+RUN apt-get update \
   && apt-get -y --no-install-recommends install \
     build-essential \
     git \
@@ -12,11 +9,11 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     libjpeg-dev \
     libpango1.0-dev \
     nodejs \
-    yarn=0.27.5-1 \
+    yarn \
   && rm -rf /var/lib/apt/lists/*
 
 # CartoDB/Windshaft-cartodb version
-ENV WINDSHAFT_CARTODB_VERSION=5.3.1
+ENV WINDSHAFT_CARTODB_VERSION=6.4.0
 
 # Install the application.
 RUN mkdir /Windshaft-cartodb \
