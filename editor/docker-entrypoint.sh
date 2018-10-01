@@ -15,15 +15,17 @@ DEFAULT_USER=$DEFAULT_USER \
   PUBLIC_PORT=$PUBLIC_PORT \
   node docker-entrypoint-util/configure $@
 
+if [[ "x$START_RESQUE_ONLY" != "x" ]]; then
+  echo "Starting Resque..."
+  exec bundle exec ./script/resque
+fi
+
 echo "Initializing the metadata database..."
 bundle exec rake db:create
 bundle exec rake db:migrate
 
 echo "Creating the default user, who will own the common data..."
 script/create_dev_user "$DEFAULT_USER" "$PASSWORD" "$EMAIL"
-
-echo "Starting Resque..."
-bundle exec ./script/resque &
 
 echo "Starting the application..."
 exec bundle exec rails server

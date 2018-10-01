@@ -45,6 +45,17 @@ services:
     container_name: cartodb-editor
     build:
       context: editor
+  cartodb-resque:
+    depends_on:
+      - cartodb-postgis
+      - cartodb-redis
+      - cartodb-mapsapi
+      - cartodb-sqlapi
+    container_name: cartodb-resque
+    build:
+      context: editor
+    environment:
+      START_RESQUE_ONLY: 1
   cartodb-router:
     #image: sabman/ihmeuw-cartodb-docker_cartodb-router
     depends_on:
