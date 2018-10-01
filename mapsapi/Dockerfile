@@ -1,6 +1,9 @@
-FROM buildpack-deps:18.04
+FROM buildpack-deps:16.04
 
-RUN apt-get update \
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - \
+  && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update \
   && apt-get -y --no-install-recommends install \
     build-essential \
     git \
@@ -9,7 +12,7 @@ RUN apt-get update \
     libjpeg-dev \
     libpango1.0-dev \
     nodejs \
-    yarn \
+    yarn=0.27.5-1 \
   && rm -rf /var/lib/apt/lists/*
 
 # CartoDB/Windshaft-cartodb version
