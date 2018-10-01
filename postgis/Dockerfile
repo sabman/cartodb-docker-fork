@@ -42,6 +42,7 @@ RUN git clone \
   && mkdir -p /docker-entrypoint-initdb.d
 
 COPY initdb-postgis.sh /docker-entrypoint-initdb.d/01-postgis.sh
+RUN chmod +rx /docker-entrypoint-initdb.d/01-postgis.sh
 
 # Let Postgres listen on all addresses (it's just localhost by default).
 ENTRYPOINT [ "docker-entrypoint.sh", "postgres", "-c", "listen_addresses=*" ]
