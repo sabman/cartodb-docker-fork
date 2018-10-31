@@ -20,8 +20,12 @@ RUN apt-get update \
     bison \
     build-essential \
     flex \
+    # some utils
+    less vim.tiny \
     # Git
     git \
+    # networking tools, because 'ip' is required by uuidtools gem to get mac addr
+    iproute2 \
     # PostgreSQL
     libpq5 \
     libpq-dev \
