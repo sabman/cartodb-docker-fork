@@ -1,6 +1,6 @@
 defaults: &defaults
   ogr2ogr:
-    binary: which ogr2ogr2.1
+    binary: which ogr2ogr
   http_port: ${PORT_IF_NOT_DEFAULT}
   session_domain: ${PUBLIC_HOST}
   account_host:   ${PUBLIC_URL}
