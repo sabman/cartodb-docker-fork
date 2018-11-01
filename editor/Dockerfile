@@ -103,9 +103,8 @@ RUN bundle install \
     C_INCLUDE_PATH=/usr/include/gdal \
     PATH=$PATH:/usr/include/gdal \
     pip install -r python_requirements.txt \
-  # Install Node dependencies.... twice.
-  # Hack because the first run fails some times while running node-gyp
-  && ( npm install || npm install ) \
+  # Install Node dependencies
+  && npm install \
   # Add dependencies of configuration merge script.
   && npm install \
     js-yaml \
