@@ -4,6 +4,7 @@ RUN apt-get update \
   && apt-get -y --no-install-recommends install \
     build-essential \
     git \
+    curl \
     # PostgreSQL
     libpq-dev \
     libpq5 \
