@@ -5,6 +5,7 @@ RUN apt-get update \
     build-essential \
     git \
     curl \
+    ca-certificates \
     # PostgreSQL
     libpq-dev \
     libpq5 \
