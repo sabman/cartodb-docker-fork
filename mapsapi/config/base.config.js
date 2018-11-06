@@ -16,7 +16,7 @@ module.exports = {
     host: 'cartodb-redis',
   },
   resources_url_templates: {
-    http: 'http://' + PUBLIC_URL + '/{{=it.user}}/api/v1/map',
-    https: 'https://' + PUBLIC_URL + '/{{=it.user}}/api/v1/map'
+    http: 'http://' + PUBLIC_URL + '/user/{{=it.user}}/api/v1/map',
+    https: 'https://' + PUBLIC_URL + '/user/{{=it.user}}/api/v1/map'
   }
 };
