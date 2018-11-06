@@ -21,10 +21,10 @@ psql -d postgres -c "UPDATE pg_database SET datistemplate='true' \
 psql -c "CREATE EXTENSION plpythonu;"
 
 echo "Creating extensions postgis, postgis_topology, plpythonu, crankshaft, plproxy"
-psql -U $PGUSER template_postgis -c \
-  "CREATE EXTENSION postgis;CREATE EXTENSION postgis_topology;\
-   GRANT ALL ON geometry_columns TO PUBLIC;\
-   GRANT ALL ON spatial_ref_sys TO PUBLIC;\
-   CREATE EXTENSION plpythonu;\
-   CREATE EXTENSION crankshaft;\
-   CREATE EXTENSION plproxy;"
+psql -U $PGUSER template_postgis -c "CREATE EXTENSION postgis;"
+psql -U $PGUSER template_postgis -c "CREATE EXTENSION postgis_topology;"
+psql -U $PGUSER template_postgis -c "GRANT ALL ON geometry_columns TO PUBLIC;"
+psql -U $PGUSER template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
+psql -U $PGUSER template_postgis -c "CREATE EXTENSION plpythonu;"
+psql -U $PGUSER template_postgis -c "CREATE EXTENSION crankshaft;"
+psql -U $PGUSER template_postgis -c "CREATE EXTENSION plproxy;"
