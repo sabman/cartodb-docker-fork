@@ -42,14 +42,14 @@ RUN curl https://bootstrap.pypa.io/get-pip.py | python \
   && git clone \
     --branch ${CARTODB_POSTGRESQL_VERSION} \
     --depth 1 git://github.com/CartoDB/cartodb-postgresql.git \
-  && pushd cartodb-postgresql \
+  && cd cartodb-postgresql \
   && make all install \
-  && popd \
+  && cd / \
   # crankshaft extensions
   && git clone \
     --branch ${CRANKSHAFT_VERSION} \
     --depth 1 git://github.com/CartoDB/crankshaft.git \
-  && pushd /crankshaft \
+  && cd /crankshaft \
   && make install \
   # Numpy gets upgraded after scikit-learn is installed
   # make sure scikit-learn is compatible with currently installed numpy, by reinstalling
