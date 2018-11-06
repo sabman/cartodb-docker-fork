@@ -31,6 +31,8 @@ RUN apt-get update \
     postgis \
     postgresql-10-postgis-2.5 \
     postgresql-10-postgis-2.5-scripts \
+    # crankshaft deps
+    python2.7-dev \
   && rm -rf /var/lib/apt/lists/*
 
 # https://github.com/CartoDB/cartodb-postgresql version
