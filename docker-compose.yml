@@ -36,6 +36,9 @@ services:
     container_name: cartodb-mapsapi
     build:
       context: mapsapi
+    environment:
+      - PUBLIC_HOST
+      - PUBLIC_PORT
   cartodb-editor:
     #image: sabman/ihmeuw-cartodb-docker_cartodb-editor
     depends_on:
@@ -50,6 +53,7 @@ services:
       - uploads:/cartodb/public/uploads
     environment:
       - PUBLIC_HOST
+      - PUBLIC_PORT
       - DEFAULT_USER
       - DEFAULT_PASSWORD
   cartodb-resque:
@@ -64,6 +68,7 @@ services:
     environment:
       - START_RESQUE_ONLY=1
       - PUBLIC_HOST
+      - PUBLIC_PORT
       - DEFAULT_USER
       - DEFAULT_PASSWORD
     volumes_from:
