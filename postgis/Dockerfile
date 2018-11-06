@@ -31,14 +31,28 @@ RUN apt-get update \
     postgresql-10-postgis-2.5-scripts \
   && rm -rf /var/lib/apt/lists/*
 
-# CartoDB/cartodb-postgresql version
+# https://github.com/CartoDB/cartodb-postgresql version
 ENV CARTODB_POSTGRESQL_VERSION=0.24.0
+# https://github.com/CartoDB/crankshaft version
+ENV CRANKSHAFT_VERSION=0.8.1
 
-RUN git clone \
+RUN curl https://bootstrap.pypa.io/get-pip.py | python \
+  # cartodb main postgresql extensions
+  && git clone \
     --branch ${CARTODB_POSTGRESQL_VERSION} \
     --depth 1 git://github.com/CartoDB/cartodb-postgresql.git \
-  && cd cartodb-postgresql \
+  && pushd cartodb-postgresql \
   && make all install \
+  && popd \
+  # crankshaft extensions
+  && git clone \
+    --branch ${CRANKSHAFT_VERSION} \
+    --depth 1 git://github.com/CartoDB/crankshaft.git \
+  && pushd /crankshaft \
+  && make install \
+  # Numpy gets upgraded after scikit-learn is installed
+  # make sure scikit-learn is compatible with currently installed numpy, by reinstalling
+  && pip install --force-reinstall --no-cache-dir scikit-learn==0.14.1 \
   && mkdir -p /docker-entrypoint-initdb.d
 
 COPY initdb-postgis.sh /docker-entrypoint-initdb.d/01-postgis.sh
