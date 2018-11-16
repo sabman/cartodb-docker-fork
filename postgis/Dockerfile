@@ -12,6 +12,7 @@ RUN apt-get update \
     libpq5 \
     postgresql-contrib-10 \
     postgresql-plpython-10 \
+    postgresql-10-plproxy \
     postgresql-server-dev-10 \
     # GIS:
     # - Proj
