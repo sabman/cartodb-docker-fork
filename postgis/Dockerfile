@@ -39,16 +39,22 @@ RUN apt-get update \
 ENV CARTODB_POSTGRESQL_VERSION=0.24.0
 # https://github.com/CartoDB/crankshaft version
 ENV CRANKSHAFT_VERSION=0.8.1
+# https://github.com/CartoDB/data-services
+ENV DATASERVICES_VERSION=0.0.2
+# https://github.com/CartoDB/dataservices-api
+ENV DATASERVICESAPI_VERSION=python-0.20.2
+# https://github.com/CartoDB/observatory-extension
+ENV OBSERVATORY_VERSION=1.9.0
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python \
-  # cartodb main postgresql extensions
+  # CartoDB main postgresql extensions
   && git clone \
     --branch ${CARTODB_POSTGRESQL_VERSION} \
     --depth 1 git://github.com/CartoDB/cartodb-postgresql.git \
   && cd cartodb-postgresql \
   && make all install \
   && cd / \
-  # crankshaft extensions
+  # Crankshaft extensions
   && git clone \
     --branch ${CRANKSHAFT_VERSION} \
     --depth 1 git://github.com/CartoDB/crankshaft.git \
@@ -57,6 +63,28 @@ RUN curl https://bootstrap.pypa.io/get-pip.py | python \
   # Numpy gets upgraded after scikit-learn is installed
   # make sure scikit-learn is compatible with currently installed numpy, by reinstalling
   && pip install --force-reinstall --no-cache-dir scikit-learn==0.14.1 \
+  # Dataservices / geocoder
+  && cd / && git clone \
+    --branch ${DATASERVICES_VERSION} \
+    --depth 1 git://github.com/CartoDB/data-services.git \
+  && cd /data-services/geocoder/extension \
+  && PGUSER=$POSTGRES_USER make all install \
+  && cd / && git clone \
+    --branch ${DATASERVICESAPI_VERSION} \
+    --depth 1 git://github.com/CartoDB/dataservices-api.git \
+  && cd /dataservices-api/server/extension \
+  && PGUSER=$POSTGRES_USER make install \
+  && cd ../lib/python/cartodb_services \
+  && pip install -r requirements.txt && pip install . \
+  && cd ../../../../client \
+  && PGUSER=$POSTGRES_USER make install \
+  # Observatory extension
+  && cd / && git clone \
+    --branch ${OBSERVATORY_VERSION} \
+    --depth 1 git://github.com/CartoDB/observatory-extension.git \
+  && cd observatory-extension \
+  && PGUSER=$POSTGRES_USER make deploy \
+  # postgres initdb scripts
   && mkdir -p /docker-entrypoint-initdb.d
 
 COPY initdb-postgis.sh /docker-entrypoint-initdb.d/01-postgis.sh
