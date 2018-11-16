@@ -5,6 +5,7 @@ RUN apt-get update \
     build-essential \
     git \
     curl \
+    wget \
     ca-certificates \
     # PostgreSQL
     libpq-dev \
@@ -33,6 +34,8 @@ RUN apt-get update \
     postgresql-10-postgis-2.5-scripts \
     # crankshaft deps
     python2.7-dev \
+    # dataservices deps
+    ruby \
   && rm -rf /var/lib/apt/lists/*
 
 # https://github.com/CartoDB/cartodb-postgresql version
