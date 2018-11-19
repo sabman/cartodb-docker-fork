@@ -18,5 +18,11 @@ module.exports = {
   resources_url_templates: {
     http: 'http://' + PUBLIC_URL + '/user/{{=it.user}}/api/v1/map',
     https: 'https://' + PUBLIC_URL + '/user/{{=it.user}}/api/v1/map'
+  },
+  analysis: {
+    batch: {
+      endpoint: "http://cartodb-router/api/v2/sql/job",
+      hostHeaderTemplate: "{{=it.username}}.localhost.lan"
+    }
   }
 };
