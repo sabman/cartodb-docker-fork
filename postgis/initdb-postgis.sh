@@ -28,6 +28,3 @@ psql -U $PGUSER template_postgis -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
 psql -U $PGUSER template_postgis -c "CREATE EXTENSION plpythonu;"
 psql -U $PGUSER template_postgis -c "CREATE EXTENSION crankshaft VERSION 'dev';"
 psql -U $PGUSER template_postgis -c "CREATE EXTENSION plproxy;"
-
-echo "Creating dataservices extension"
-psql -U $PGUSER template_postgis -c "CREATE EXTENSION cdb_dataservices_client;"
