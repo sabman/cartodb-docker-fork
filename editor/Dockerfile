@@ -94,7 +94,7 @@ RUN git clone --recursive --branch v${CARTODB_VERSION} --depth 1 https://github.
 WORKDIR /cartodb
 
 # Environment type.
-ENV RAILS_ENV=development
+ENV RAILS_ENV=$ENVIRONMENT
 
 # Install Ruby dependencies.
 RUN bundle install \
