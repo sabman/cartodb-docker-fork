@@ -58,6 +58,7 @@ services:
         - RAILS_ENV=$ENVIRONMENT
     volumes:
       - uploads:/cartodb/public/uploads
+      - ./migrated:/migrated
     environment:
       - PUBLIC_HOST
       - PUBLIC_PORT
