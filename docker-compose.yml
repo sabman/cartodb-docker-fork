@@ -54,6 +54,8 @@ services:
     container_name: cartodb-editor
     build:
       context: editor
+      args:
+        - RAILS_ENV=$ENVIRONMENT
     volumes:
       - uploads:/cartodb/public/uploads
     environment:
@@ -61,7 +63,6 @@ services:
       - PUBLIC_PORT
       - DEFAULT_USER
       - DEFAULT_PASSWORD
-      - ENVIRONMENT
   cartodb-resque:
     depends_on:
       - cartodb-postgis

@@ -94,7 +94,13 @@ RUN git clone --recursive --branch v${CARTODB_VERSION} --depth 1 https://github.
 WORKDIR /cartodb
 
 # Environment type.
-ENV RAILS_ENV=$ENVIRONMENT
+ARG RAILS_ENV=development
+ENV RAILS_ENV=$RAILS_ENV
+
+# Copy resources.
+COPY util/* /cartodb/docker-entrypoint-util/
+COPY config/* /cartodb/config/
+COPY docker-entrypoint.sh /cartodb/
 
 # Install Ruby dependencies.
 RUN bundle install \
@@ -119,11 +125,6 @@ RUN bundle install \
     /root/.gem \
     /root/.npm \
   && mkdir -p /cartodb/docker-entrypoint-util
-
-# Copy resources.
-COPY util/* /cartodb/docker-entrypoint-util/
-COPY config/* /cartodb/config/
-COPY docker-entrypoint.sh /cartodb/
 
 EXPOSE 3000
 
