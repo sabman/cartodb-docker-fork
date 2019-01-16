@@ -72,6 +72,8 @@ RUN apt-get update \
     libicu-dev \
     unp \
     zip \
+    # for user migration rake tasks
+    redis-tools \
     # Other dependencies
     unzip \
     wget \
