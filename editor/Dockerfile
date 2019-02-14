@@ -111,6 +111,7 @@ RUN CPLUS_INCLUDE_PATH=/usr/include/gdal \
     js-yaml \
     yargs 
   # Compile static assets
+COPY config/* /cartodb/config/
  RUN PATH=$PATH:/cartodb/node_modules/grunt-cli/bin \
     bundle exec grunt --environment=${RAILS_ENV}
   # Clean up.
@@ -125,7 +126,6 @@ EXPOSE 3000
 
 # Copy resources.
 COPY util/* /cartodb/docker-entrypoint-util/
-COPY config/* /cartodb/config/
 COPY docker-entrypoint.sh /cartodb/
 RUN chmod u+x /cartodb/docker-entrypoint.sh
 
