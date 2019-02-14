@@ -98,23 +98,23 @@ ARG RAILS_ENV=development
 ENV RAILS_ENV=$RAILS_ENV
 
 # Install Ruby dependencies.
-RUN bundle install \
+RUN bundle install
   # Install Python dependencies.
-  && CPLUS_INCLUDE_PATH=/usr/include/gdal \
+RUN CPLUS_INCLUDE_PATH=/usr/include/gdal \
     C_INCLUDE_PATH=/usr/include/gdal \
     PATH=$PATH:/usr/include/gdal \
-    pip install -r python_requirements.txt \
+    pip install -r python_requirements.txt
   # Install Node dependencies
-  && npm install \
+ RUN npm install
   # Add dependencies of configuration merge script.
-  && npm install \
+ RUN npm install \
     js-yaml \
     yargs \
   # Compile static assets
-  && PATH=$PATH:/cartodb/node_modules/grunt-cli/bin \
-    bundle exec grunt --environment=${RAILS_ENV} \
+ RUN PATH=$PATH:/cartodb/node_modules/grunt-cli/bin \
+    bundle exec grunt --environment=${RAILS_ENV}
   # Clean up.
-  && rm -rf \
+ RUN rm -rf \
     /root/.cache \
     /root/.bundle \
     /root/.gem \
