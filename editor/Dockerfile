@@ -109,7 +109,7 @@ RUN CPLUS_INCLUDE_PATH=/usr/include/gdal \
   # Add dependencies of configuration merge script.
  RUN npm install \
     js-yaml \
-    yargs \
+    yargs 
   # Compile static assets
  RUN PATH=$PATH:/cartodb/node_modules/grunt-cli/bin \
     bundle exec grunt --environment=${RAILS_ENV}
