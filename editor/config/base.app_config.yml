@@ -8,15 +8,15 @@ defaults: &defaults
   vizjson_cache_domains:
     - ${PUBLIC_HOST}
   common_data:
-    protocol: http
+    protocol: ${PROTOCOL}
     username: ${DEFAULT_USER}
   tiler:
     internal:
-      protocol: http
+      protocol: ${PROTOCOL}
       domain:   cartodb-mapsapi
       host:     cartodb-mapsapi
     private: &routing_defaults
-      protocol: http
+      protocol: ${PROTOCOL}
       domain:   ${PUBLIC_HOST}
       port:     ${PUBLIC_PORT}
     public:
@@ -35,7 +35,7 @@ defaults: &defaults
       options:
         tiler_domain:   ${PUBLIC_HOST}
         tiler_port:     ${PUBLIC_PORT}
-        tiler_protocol: http
+        tiler_protocol: ${PROTOCOL}
         sql_domain:     ${PUBLIC_HOST}
         sql_port:       ${PUBLIC_PORT}
         sql_protocol:   http

@@ -18,6 +18,7 @@ RUN mkdir /CartoDB-SQL-API \
 # Copy resources.
 COPY config/*.js /CartoDB-SQL-API/config/environments/
 COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /CartoDB-SQL-API
 

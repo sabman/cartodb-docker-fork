@@ -13,6 +13,7 @@ echo "Writing the configuration files..."
 DEFAULT_USER=$DEFAULT_USER \
   PUBLIC_HOST=$PUBLIC_HOST \
   PUBLIC_PORT=$PUBLIC_PORT \
+  ENVIRONMENT=$ENVIRONMENT \
   node docker-entrypoint-util/configure $@
 
 if [[ "x$START_RESQUE_ONLY" != "x" ]]; then

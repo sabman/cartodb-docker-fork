@@ -34,6 +34,7 @@ const dbConfigFiles = database.map(createAbsoluteFilepath);
 
 const PUBLIC_HOST = public_host || process.env.PUBLIC_HOST || 'localhost';
 const PUBLIC_PORT = public_port || process.env.PUBLIC_PORT || '80';
+const PROTOCOL = process.env.ENVIRONMENT === "production" ? "https" : "http";
 
 // These next two values are used to build URLs for the browser. If we're using the default port,
 // 80, we don't want to include it. If we're using a port besides the default, we MUST include it,
@@ -57,6 +58,7 @@ const configEnv = {
   PUBLIC_URL,
   PORT_IF_NOT_DEFAULT,
   DEFAULT_USER,
+  PROTOCOL
 };
 
 // Do environment substitution on app config files, supplying PUBLIC_HOST and PUBLIC_PORT.

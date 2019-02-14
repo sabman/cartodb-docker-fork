@@ -29,6 +29,7 @@ RUN mkdir /Windshaft-cartodb \
 # Copy resources.
 COPY config/*.js /Windshaft-cartodb/config/environments/
 COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /Windshaft-cartodb
 
