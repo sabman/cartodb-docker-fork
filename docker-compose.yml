@@ -62,7 +62,7 @@ services:
       - PUBLIC_PORT
       - ENVIRONMENT
   cartodb-editor:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-editor
+    image: cartodb-editor
     depends_on:
       - cartodb-postgis
       - cartodb-redis
@@ -82,7 +82,9 @@ services:
       - DEFAULT_USER
       - DEFAULT_PASSWORD
   cartodb-resque:
-    image: sabman/ihmeuw-cartodb-docker_cartodb-editor
+    image: cartodb-editor
+    #build:
+      #context: editor
     depends_on:
       - cartodb-postgis
       - cartodb-redis

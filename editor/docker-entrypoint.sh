@@ -13,7 +13,7 @@ echo "Writing the configuration files..."
 DEFAULT_USER=$DEFAULT_USER \
   PUBLIC_HOST=$PUBLIC_HOST \
   PUBLIC_PORT=$PUBLIC_PORT \
-  ENVIRONMENT=$ENVIRONMENT \
+  ENVIRONMENT=$RAILS_ENV \
   node docker-entrypoint-util/configure $@
 
 if [[ "x$START_RESQUE_ONLY" != "x" ]]; then
@@ -21,12 +21,15 @@ if [[ "x$START_RESQUE_ONLY" != "x" ]]; then
   exec bundle exec ./script/resque
 fi
 
+[ -e /cartodb/tmp/pids/server.pid ] && rm /cartodb/tmp/pids/server.pid
+
 echo "Initializing the metadata database..."
+bundle exec rake db:drop
 bundle exec rake db:create
 bundle exec rake db:migrate
 
 echo "Creating the default user, who will own the common data..."
-script/create_dev_user "$DEFAULT_USER" "$PASSWORD" "$EMAIL"
+#script/create_dev_user "$DEFAULT_USER" "$PASSWORD" "$EMAIL"
 
 echo "Starting the application..."
 exec bundle exec rails server -b 0.0.0.0
