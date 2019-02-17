@@ -3,4 +3,4 @@ FROM nginx:1.13
 COPY config/init-config.sh /etc/nginx/
 # copy the config template
 COPY cartodb.nginx.proxy.conf /etc/nginx/conf.d/default.conf.tmpl
-RUN /etc/nginx/init-config.sh
+RUN chmod u+x /etc/nginx/init-config.sh && /etc/nginx/init-config.sh
