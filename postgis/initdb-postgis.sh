@@ -16,7 +16,7 @@ createuser tileuser --no-createrole --no-createdb --no-superuser -U $PGUSER
 echo "Creating database 'template_postgis'..."
 createdb -T template0 -O postgres -U $PGUSER -E UTF8 template_postgis
 # createlang -d template_postgis plpgsql;
-psql -U $PGUSER template_postgis -c "CREATE LANGUAGE plpgsql;"
+psql -U $PGUSER template_postgis -c "CREATE EXTENSION plpgsql;"
 psql -d postgres -c "UPDATE pg_database SET datistemplate='true' \
   WHERE datname='template_postgis'"
 psql -c "CREATE EXTENSION plpythonu;"
