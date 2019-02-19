@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 volumes:
   postgresdb:
@@ -6,25 +6,7 @@ volumes:
   uploads:
 
 services:
-
-  # production-nginx-container:
-    # container_name: 'production-nginx-container'
-    # image: nginx:latest
-    # ports:
-    #   - "80:80"
-    #   - "443:443"
-    # volumes:
-    #   - ./production.conf:/etc/nginx/conf.d/default.conf
-    #   - ./production-site:/usr/share/nginx/html
-    #   - ./dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-    #   - /docker-volumes/etc/letsencrypt/live/cartodb.spatial-labs.com/fullchain.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/fullchain.pem
-    #   - /docker-volumes/etc/letsencrypt/live/cartodb.spatial-labs.com/privkey.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/privkey.pem
-    #   #for certbot challenges
-    #   - /docker-volumes/data/letsencrypt:/data/letsencrypt
-    # networks:
-    #   - docker-network
   cartodb-postgis:
-    #image: sabman/ihmeuw-cartodb-docker_cartodb-postgis
     container_name: cartodb-postgis
     build:
       context: postgis
@@ -33,14 +15,12 @@ services:
     environment:
       - POSTGRES_USER
   cartodb-redis:
-    #image: sabman/ihmeuw-cartodb-docker_cartodb-redis
     container_name: cartodb-redis
     build:
       context: redis
     volumes:
       - redisdb:/var/lib/redis
   cartodb-sqlapi:
-    #image: sabman/ihmeuw-cartodb-docker_cartodb-sqlapi
     depends_on:
       - cartodb-postgis
       - cartodb-redis
@@ -51,7 +31,6 @@ services:
     environment:
       - ENVIRONMENT
   cartodb-mapsapi:
-    #image: sabman/ihmeuw-cartodb-docker_cartodb-mapsapi
     depends_on:
       - cartodb-postgis
       - cartodb-redis
@@ -85,8 +64,6 @@ services:
       - DEFAULT_PASSWORD
   cartodb-resque:
     image: cartodb-editor
-    #build:
-      #context: editor
     depends_on:
       - cartodb-postgis
       - cartodb-redis
@@ -103,7 +80,6 @@ services:
     volumes_from:
       - cartodb-editor
   cartodb-router:
-    #image: sabman/ihmeuw-cartodb-docker_cartodb-router
     depends_on:
       - cartodb-mapsapi
       - cartodb-sqlapi
@@ -121,15 +97,17 @@ services:
       - PUBLIC_HOST
       - CERTS_PATH
     volumes:
-      - ./router/cartodb.nginx.proxy.conf:/etc/nginx/conf.d/default.conf
-      - ./production-site:/usr/share/nginx/html
-      - ./dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
-      - /docker-volumes/etc/letsencrypt/live/cartodb.spatial-labs.com/fullchain.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/fullchain.pem
-      - /docker-volumes/etc/letsencrypt/live/cartodb.spatial-labs.com/privkey.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/privkey.pem
-      #for certbot challenges
-      - /docker-volumes/data/letsencrypt:/data/letsencrypt
-
-networks:
-  docker-network:
-    driver: bridge
-
+      # to run locally but in production use /docker-volumes/... (see commented section below):
+      - ./certs/dh-param/dhparam-2048.pem:/etc/letsencrypt/live/dhparam-2048.pem
+      - ./certs/live/cartodb.spatial-labs.com/fullchain.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/fullchain.pem
+      - ./certs/live/cartodb.spatial-labs.com/privkey.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/privkey.pem
+      # for certbot challenges
+      - ./certs/letsencrypt:/data/letsencrypt
+      # in production use /docker-volumes/...
+      # - ./router/cartodb.nginx.proxy.conf:/etc/nginx/conf.d/default.conf
+      # - ./production-site:/usr/share/nginx/html
+      # - ./dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
+      # - /docker-volumes/etc/letsencrypt/live/cartodb.spatial-labs.com/fullchain.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/fullchain.pem
+      # - /docker-volumes/etc/letsencrypt/live/cartodb.spatial-labs.com/privkey.pem:/etc/letsencrypt/live/cartodb.spatial-labs.com/privkey.pem
+      # #for certbot challenges
+      # - /docker-volumes/data/letsencrypt:/data/letsencrypt
