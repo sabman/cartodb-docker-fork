@@ -30,6 +30,8 @@ services:
       context: postgis
     volumes:
       - postgresdb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER
   cartodb-redis:
     #image: sabman/ihmeuw-cartodb-docker_cartodb-redis
     container_name: cartodb-redis
