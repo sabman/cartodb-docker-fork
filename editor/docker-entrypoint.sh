@@ -24,7 +24,7 @@ fi
 [ -e /cartodb/tmp/pids/server.pid ] && rm /cartodb/tmp/pids/server.pid
 
 echo "Initializing the metadata database..."
-bundle exec rake db:drop
+# bundle exec rake db:drop
 bundle exec rake db:create
 bundle exec rake db:migrate
 
