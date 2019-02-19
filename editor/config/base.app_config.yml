@@ -38,7 +38,7 @@ defaults: &defaults
         tiler_protocol: ${PROTOCOL}
         sql_domain:     ${PUBLIC_HOST}
         sql_port:       ${PUBLIC_PORT}
-        sql_protocol:   http
+        sql_protocol:   ${PROTOCOL}
   cartodb_com_hosted: false
 
 development:
