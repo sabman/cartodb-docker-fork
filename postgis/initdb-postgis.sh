@@ -1,6 +1,7 @@
 #!/bin/sh
 
-set -e
+# set -e
+set -x
 
 # Perform all actions as $POSTGRES_USER
 export PGUSER="$POSTGRES_USER"
