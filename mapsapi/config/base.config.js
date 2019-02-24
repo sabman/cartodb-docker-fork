@@ -48,6 +48,11 @@ module.exports = {
       hostHeaderTemplate: "{{=it.username}}.localhost.lan"
     }
   }
+  ,millstone: {
+    // Needs to be writable by server user
+    cache_basedir: '/tmp/cdb-tiler-dev/millstone-dev'
+  }
+
   // , "varnish": { TODO: add varnish
   //   "host": "localhost",
   // }
