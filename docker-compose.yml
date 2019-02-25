@@ -4,6 +4,7 @@ volumes:
   postgresdb:
   redisdb:
   uploads:
+  assets:
 
 services:
   cartodb-postgis:
@@ -56,6 +57,7 @@ services:
         - RAILS_ENV=$ENVIRONMENT
     volumes:
       - uploads:/cartodb/public/uploads
+      - assets:/cartodb/public/assets
       - ./migrated:/migrated
     environment:
       - PUBLIC_HOST
@@ -96,6 +98,8 @@ services:
     environment:
       - PUBLIC_HOST
       - CERTS_PATH
+    volumes_from:
+      - cartodb-editor
     volumes:
       # to run locally but in production use /docker-volumes/... (see commented section below):
       - ./certs/dh-param/dhparam-2048.pem:/etc/letsencrypt/live/dhparam-2048.pem
