@@ -14,4 +14,5 @@ COPY cartodb.nginx.proxy.conf /etc/nginx/conf.d/default.conf.tmpl
 # generate a production reverse proxy config
 COPY config/init-config.sh /etc/nginx/init-config.sh
 RUN chmod u+x /etc/nginx/init-config.sh
+RUN apt-get update && apt-get install -y --no-install-recommends vim-tiny
 RUN /etc/nginx/init-config.sh

@@ -24,6 +24,8 @@ WORKDIR /CartoDB-SQL-API
 
 EXPOSE 80
 
+RUN apt-get update && apt-get install -y --no-install-recommends vim-tiny
+
 # We configure the application using just the base config here. Additional configuration files can
 # be merged with the base by supplying their filenames as the CMD.
 ENTRYPOINT [ "docker-entrypoint.sh", "base.config.js" ]
