@@ -50,7 +50,7 @@ module.exports = {
   }
   ,millstone: {
     // Needs to be writable by server user
-    cache_basedir: '/tmp/cdb-tiler-dev/millstone-dev'
+    cache_basedir: '/tmp/cdb-tiler/millstone'
   }
 
   // , "varnish": { TODO: add varnish
