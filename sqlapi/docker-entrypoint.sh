@@ -9,4 +9,5 @@ echo "Writing the configuration file /etc/cartodb/config.js..."
 node config/environments/merge-modules -i $@ -o /etc/cartodb/config.js
 
 echo "Starting the application..."
-exec node app -c /etc/cartodb/config.js
+exec tail -f /dev/null
+# exec node app -c /etc/cartodb/config.js
