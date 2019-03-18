@@ -7,4 +7,6 @@
 - [ ] check port for app_config
 - [ ] `{"error":["PL/Proxy function cdb_dataservices_client._cdb_service_quota_info(2): [dataservices_db] PQconnectPoll: FATAL: role \"geocoder_api\" does not exist\n"]}`
 - [ ] Running analysis gives: `Unable to enqueue SQL API batch job`
+  - see: https://groups.google.com/forum/?nomobile=true#!msg/cartodb/MzKlzZnYqX8/VY7inUwDBAAJ
 - When previewing the data in tables getting this error: `"Template 'tpl_077e94bf_8fa9_4684_96af_b8b58aa624b4' of user 'admin' not found"`
+- [x] Unauthorized on SQLAPI requests: for some reason the API key is not being found in the REDIS Store and refreshing the user's API key via the dashboard fixed it!

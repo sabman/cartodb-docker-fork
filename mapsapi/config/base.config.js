@@ -7,8 +7,8 @@ const PUBLIC_URL = (
 );
 
 module.exports = {
-  host: '0.0.0.0',
-  node_host: '0.0.0.0',
+  host: 'cartodb-mapsapi',
+  // node_host: '0.0.0.0',
   // user_from_host: '^([^\\.]+)\\.',
   user_from_host: '\/user\/(.*)$',
   postgres: {
@@ -56,4 +56,12 @@ module.exports = {
   // , "varnish": { TODO: add varnish
   //   "host": "localhost",
   // }
-};
+
+  ,renderer: {
+    mapnik: {
+      postgis: {
+        host: "carto-postgis",
+      },
+    }
+  },
+}
