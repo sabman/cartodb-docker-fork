@@ -27,10 +27,12 @@ fi
 
 ) 200>/etc/letsencrypt/lock
 
-DOMAIN=$(echo $DOMAINS | cut -d ',' -f 1) SERVER=${server} envsubst < /etc/nginx/ssl.conf.tmpl > /etc/nginx/ssl.conf
+envsubst_nginx="envsubst '"'${DOMAIN},${SERVER}'"'"
+
+DOMAIN=$(echo $DOMAINS | cut -d ',' -f 1) SERVER=${server} $envsubst_nginx < /etc/nginx/ssl.conf.tmpl > /etc/nginx/ssl.conf
 for server in $(echo $DOMAINS | sed 's/,/ /g' )
 do
-  DOMAIN=$(echo $DOMAINS | cut -d ',' -f 1) SERVER=${server} envsubst < /etc/nginx/server.conf.tmpl > /etc/nginx/site.d/${server}.conf
+  DOMAIN=$(echo $DOMAINS | cut -d ',' -f 1) SERVER=${server} $envsubst_nginx < /etc/nginx/server.conf.tmpl > /etc/nginx/site.d/${server}.conf
 done
 NUMPROCS=$(cat /sys/fs/cgroup/cpuacct/cpuacct.usage_percpu | wc -w)
 sed -i "s/worker_processes\\s\\+1;/worker_processes ${NUMPROCS};/" /etc/nginx/nginx.conf
