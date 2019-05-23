@@ -99,7 +99,6 @@ WORKDIR /cartodb
 ARG RAILS_ENV=development
 ENV RAILS_ENV=$RAILS_ENV
 
-COPY config/* /cartodb/config/
 
 # Install Ruby dependencies.
 RUN bundle install \
@@ -113,9 +112,12 @@ RUN bundle install \
   # Add dependencies of configuration merge script.
   && npm install \
     js-yaml \
-    yargs \
-  # Compile static assets
-  && PATH=$PATH:/cartodb/node_modules/grunt-cli/bin \
+    yargs
+
+COPY config/* /cartodb/config/
+
+# Compile static assets
+RUN PATH=$PATH:/cartodb/node_modules/grunt-cli/bin \
     bundle exec grunt --environment=${RAILS_ENV} \
   # Clean up.
   && rm -rf \
