@@ -4,6 +4,7 @@ volumes:
   postgresdb:
   redisdb:
   public:
+  letsencrypt:
 
 services:
   cartodb-postgis:
@@ -94,6 +95,7 @@ services:
       context: router
     volumes:
       - public:/public:ro
+      - letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
       - 443:443
