@@ -62,6 +62,7 @@ services:
     environment:
       - PUBLIC_HOST
       - PUBLIC_PORT
+      - PUBLIC_PROTOCOL
       - DEFAULT_USER
       - DEFAULT_PASSWORD
   cartodb-resque:
@@ -76,6 +77,7 @@ services:
       - START_RESQUE_ONLY=1
       - PUBLIC_HOST
       - PUBLIC_PORT
+      - PUBLIC_PROTOCOL
       - DEFAULT_USER
       - DEFAULT_PASSWORD
       - ENVIRONMENT
