@@ -57,7 +57,7 @@ services:
       args:
         - RAILS_ENV=$ENVIRONMENT
     volumes:
-      - uploads:/cartodb/public/uploads
+      - public:/cartodb/public
       - ./migrated:/migrated
     environment:
       - PUBLIC_HOST
@@ -90,6 +90,8 @@ services:
     container_name: cartodb-router
     build:
       context: router
+    volumes:
+      - public:/public:ro
     ports:
       - 80:80
       - 443:443
