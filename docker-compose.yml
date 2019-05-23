@@ -3,7 +3,7 @@ version: '2'
 volumes:
   postgresdb:
   redisdb:
-  uploads:
+  public:
 
 services:
   cartodb-postgis:
