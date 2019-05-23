@@ -99,6 +99,8 @@ WORKDIR /cartodb
 ARG RAILS_ENV=development
 ENV RAILS_ENV=$RAILS_ENV
 
+COPY config/* /cartodb/config/
+
 # Install Ruby dependencies.
 RUN bundle install \
   # Install Python dependencies.
@@ -127,7 +129,6 @@ EXPOSE 3000
 
 # Copy resources.
 COPY util/* /cartodb/docker-entrypoint-util/
-COPY config/* /cartodb/config/
 COPY docker-entrypoint.sh /cartodb/
 
 # We configure the application using just the base config files here. Additional configuration files
