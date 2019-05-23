@@ -8,11 +8,13 @@ EMAIL=${EMAIL:-username@example.com}
 # host and port on which the app will be exposed
 PUBLIC_HOST=${PUBLIC_HOST:-localhost}
 PUBLIC_PORT=${PUBLIC_PORT:-80}
+PUBLIC_PROTOCOL=${PUBLIC_PROTOCOL:-http}
 
 echo "Writing the configuration files..."
 DEFAULT_USER=$DEFAULT_USER \
   PUBLIC_HOST=$PUBLIC_HOST \
   PUBLIC_PORT=$PUBLIC_PORT \
+  PUBLIC_PROTOCOL=$PUBLIC_PROTOCOL \
   node docker-entrypoint-util/configure $@
 
 if [[ "x$START_RESQUE_ONLY" != "x" ]]; then
