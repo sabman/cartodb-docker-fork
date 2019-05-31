@@ -27,7 +27,7 @@ module.exports = {
   },
   analysis: {
     batch: {
-      endpoint: "http://cartodb-sqlapi:8080/api/v2/sql/job",
+      endpoint: "http://cartodb-sqlapi:8080/user/{{=it.username}}/api/v2/sql/job",
       hostHeaderTemplate: "{{=it.username}}.localhost.lan"
     }
   }
