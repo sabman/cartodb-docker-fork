@@ -5,4 +5,5 @@ module.exports = {
   redis_host: 'cartodb-redis',
   // Send log messages to stdout.
   log_filename: undefined,
+  user_from_host: "^(.*)\\.localhost\\.lan"
 };
