@@ -20,7 +20,7 @@ services:
     build:
       context: redis
     volumes:
-      - redisdb:/var/lib/redis
+      - redisdb:/data
   cartodb-sqlapi:
     #image: sabman/ihmeuw-cartodb-docker_cartodb-sqlapi
     depends_on:
